@@ -1,0 +1,144 @@
+<!doctype html>
+<html lang="en">
+  <head>
+  	<title>Control System</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+	<link href='https://fonts.googleapis.com/css?family=Roboto:400,100,300,700' rel='stylesheet' type='text/css'>
+
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+	
+	<link rel="stylesheet" href="../css/style.css">
+
+	<style>
+
+	body{
+		/*overflow: hidden;*/
+	}
+	
+	#img_explication{
+			background-size: 380px 300px;
+	}
+	#img_bloc_1{
+		margin-left: 100px;
+	}
+	#btn_edit_params{
+		margin-left: 120px;
+	}
+	
+	#all_blocs{
+		margin-left: 50px;
+	}
+
+	#system_btns{
+		text-align:center;
+		display: flex;
+  		gap: 100px;
+  		margin-left: 370px;
+	}
+
+	
+	</style>
+
+	</head>
+	<body>				
+
+			<div class="col-md-5" style="margin-left: 100px;">
+					<table>
+					  <tr>
+							<td><a href="firing_system_params_form.html">Firing System Params</a></td>
+							</tr>
+							<tr>
+							<td><a href="bielle_manivelle_params_form.html">Bielle Manivelle System Params</a></td>
+							</tr>
+							<tr>
+							<td><a href="control_system_form.html">System Control</a></td>
+							</tr>
+					</table>
+
+			</div>
+
+							<div style="border-style: double;padding:100px;margin:100px;">
+								
+									<h3 class="mb-4" style="color:black;text-align:center;">System Control</h3>
+									
+				      		
+									<div id="system_btns">
+										<input type="submit" id="btn_start" class="btn btn-success" value="Start" onclick="Set_btn_state(this.id)">
+										<input type="submit" id="btn_stop" class="btn btn-danger" value="Stop" onclick="Set_btn_state(this.id)">
+									</div>
+								
+							</div>
+				
+			</div>
+		</div>
+
+<script>
+
+// step 1 : execute url to open session .
+
+function OpenSession_shared_btn_state() 
+{
+  fetch('http://localhost:80/web_app_projectile/php/Btn_Start_Stop/state_btn_var.php')
+    .then(response => response.json())
+    .then(data => {
+      // open session to share btn state variable 
+    })
+    .catch(error => {
+      console.error('Error:', error);
+    });
+}
+
+OpenSession_shared_btn_state();
+
+
+function get_btn_state()
+{
+fetch('http://localhost:80/web_app_projectile/php/Btn_Start_Stop/get_btn_state/get_btn_state.php')
+    .then(response => response.json())
+    .then(data => {
+      // open session to share btn state variable
+      console.log("btn state = " +data); 
+    })
+    .catch(error => {
+      console.error('Error:', error);
+    });
+}
+
+get_btn_state();
+
+
+function set_btn_state_API(state_btn)
+{
+	fetch('http://localhost:80/web_app_projectile/php/Btn_Start_Stop/set_btn_state/set_btn_state.php?state='+state_btn)
+    .then(response => response.json())
+    .then(data => {
+      // data ...
+    })
+    .catch(error => {
+      console.error('Error:', error);
+    });
+}
+
+function Set_btn_state(id)
+{
+		if ( id == "btn_start" ) {
+			set_btn_state_API("1");
+		}
+		else if (id == "btn_stop") {
+			set_btn_state_API("0");
+		}
+}
+
+
+</script>
+
+
+</body>
+
+
+
+
+</html>
+

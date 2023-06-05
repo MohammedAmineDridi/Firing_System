@@ -1,0 +1,152 @@
+<!doctype html>
+<html lang="en">
+  <head>
+  	<title>Firing System Params</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+	<link href='https://fonts.googleapis.com/css?family=Roboto:400,100,300,700' rel='stylesheet' type='text/css'>
+
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+	
+	<link rel="stylesheet" href="css/style.css">
+
+	<style>
+
+	body{
+		/*overflow: hidden;*/
+	}
+	
+	#img_explication{
+			background-size: 500px 450px;
+	}
+	#img_bloc_1{
+		margin-left: 100px;
+	}
+	#btn_edit_params{
+		margin-left: 120px;
+	}
+	
+	#all_blocs{
+		margin-left: 50px;
+	}
+
+	</style>
+
+	</head>
+	<body>
+	
+		<div class="container">
+			<div>		
+			<h1 style="text-align:center;font-weight: bolder;color:#46b5d1;"> Firing System Parameters </h1>
+			</div>
+
+			<div class="row justify-content-center">				
+						<div class="row no-gutters" id="all_blocs" >
+
+							<div class="col-md-2" style="margin-left: -50px;">
+								<table>
+								  <tr>
+								    <td><a href="firing_system_params_form.html">Firing System Params</a></td>
+								  </tr>
+								  <tr>
+								    <td><a href="bielle_manivelle_params_form.html">Bielle Manivelle Params</a></td>
+								  </tr>
+								  <tr>
+								    <td><a href="control_system_form.html">System Control</a></td>
+								  </tr>
+								</table>
+
+							</div>
+
+							<div class="col-md-5" style="border-style: double;padding-left: 10px;">
+								
+									<h3 class="mb-4" style="color:#46b5d1;margin-left: 65px;">Firing System Parameters</h3>
+									<div id="form-message-warning" class="mb-4"></div> 
+				      		
+									<form method="POST" id="contactForm" name="contactForm" class="contactForm" action="php/Firing_System/Update_Firing_System_params.php">
+										<div class="row">
+											<div class="col-md-6">
+												<div class="form-group">
+													<label class="label" for="name">K : spring constant (N.m)</label>
+													<input type="text" class="form-control" name="k" id="k" placeholder="k">
+												</div>
+											</div>
+											<div class="col-md-12">
+												<div class="form-group">
+													<label class="label" for="subject">L0 : initial elongation in idle mode (cm) </label>
+													<input type="text" class="form-control" name="L0" id="L0" placeholder="L0">
+												</div>
+											</div>
+											<div class="col-md-12">
+												<div class="form-group">
+													<label class="label" for="subject">a : max elongation distance (cm) </label>
+													<input type="text" class="form-control" name="a" id="a" placeholder="a">
+												</div>
+											</div>
+											<div class="col-md-12">
+												<div class="form-group">
+													<label class="label" for="subject">b : width (cm) </label>
+													<input type="text" class="form-control" name="b" id="b" placeholder="b">
+												</div>
+											</div>
+											<div class="col-md-12">
+												<div class="form-group">
+													<label class="label" for="subject">m : mass of bullet (kg) </label>
+													<input type="text" class="form-control" name="m" id="m" placeholder="m">
+												</div>
+											</div>
+
+
+											<div class="col-md-12">
+												<div class="form-group">
+													<input type="submit" id="btn_edit_params" value="Edit System Parameters" class="btn btn-primary">
+													<div class="submitting"></div>
+												</div>
+											</div>
+										</div>
+									</form>
+								
+							</div>
+							<div class="col-md-4 d-flex align-items-stretch" id="img_bloc_1">
+							<div class="info-wrap w-100 p-5 img" id="img_explication" style="background-image: url('imgs/slingshot.png');">
+			          		</div>
+
+							</div>
+							<!--<p style="margin-left: 700px;"> l1/L1 = elongation distance after thread attraction </p>-->
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+<script>
+
+function fetchData() {
+  fetch('http://localhost:80/web_app_projectile/php/Firing_System/get_Firing_Params_json.php')
+    .then(response => response.json())
+    .then(data => {
+      // Populate the input fields with the fetched data
+      document.getElementById('k').value = data[0]['k'];
+      document.getElementById('L0').value = data[0]['L0'];
+      document.getElementById('a').value = data[0]['a'];
+      document.getElementById('b').value = data[0]['b'];
+      document.getElementById('m').value = data[0]['m'];
+    })
+    .catch(error => {
+      console.error('Error:', error);
+    });
+}
+
+fetchData();
+
+</script>
+
+
+	</body>
+
+
+
+
+</html>
+
